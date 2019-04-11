@@ -7,7 +7,7 @@
 
 ### Captive Portal Data
 
-*This is the data that OWL will receive from the user when they a captive portal.* 
+*The data that OWL will receive from the civilian when he/she submits a captive portal.* 
 
 A [random data generation](https://github.com/Project-Owl/data-analytics/blob/master/generate_random_data/Generate_Random_Data.py) was created to randomly fill in the information that the captive portal is asking for. This [data](https://github.com/Project-Owl/data-analytics/blob/master/CaptivePortalDataGeneration.ipynb) gives a sense of what the data might be like without actually waiting for a disaster.
 
