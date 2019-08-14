@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[1]:
 
 
 # Imports
@@ -10,18 +10,17 @@ import numpy as np
 import pandas as pd
 import geopy
 from geopy.distance import VincentyDistance
-import folium
 
 
-# In[7]:
+# In[2]:
 
 
-def duck_coordinates(cdc, bearing=90*np.arange(0,4,.8), land_type='urban', clusters=1, duck_type='duckling'):
+def duck_coordinates(mdc, bearing=90*np.arange(0,4,.8), land_type='urban', clusters=1, duck_type='duckling'):
     '''
     Creates coordinates for mama ducks or ducklings
     
     Parameters:
-    dc: (center duck coordinate) coordinate of center of clusterduck
+    mdc: (mother duck coordinate) coordinate of center of clusterduck
     
     bearing: how far each new duck is separated from each other in respect to the mdc (in degrees). Default is set
              to [0, 72, 144, 216, 288].
@@ -41,7 +40,7 @@ def duck_coordinates(cdc, bearing=90*np.arange(0,4,.8), land_type='urban', clust
     duck_coordinates = []
     for i in range(clusters):
         coordinates = []
-        for coor in cdc:
+        for coor in mdc:
             lat, lon = coor
             origin = geopy.Point(lat, lon)
             if duck_type=='mama':
@@ -78,12 +77,12 @@ def duck_coordinates(cdc, bearing=90*np.arange(0,4,.8), land_type='urban', clust
             else:
                 print('That type of duck went extinct!')
         cluster[i] = coordinates
-        cdc = coordinates
+        mdc = coordinates
         duck_coordinates+=coordinates
     return cluster, duck_coordinates
 
 
-# In[8]:
+# In[3]:
 
 
 def plot_ducks(center, duck_coordinates, radius=402.336, circle=False, duck_type='duckling', tiles='OpenStreetMap'):
@@ -102,7 +101,7 @@ def plot_ducks(center, duck_coordinates, radius=402.336, circle=False, duck_type
     m: a Folium object (map with the ducks)
     '''
     
-    m = folium.Map(location=[center[0], center[1]], zoom_start=18, tiles=tiles)
+    m = folium.Map(location=[center], zoom_start=18, tiles=tiles)
     
     if duck_type == 'mama':
         color = 'yellow'
