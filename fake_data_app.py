@@ -25,11 +25,11 @@ import plotly.express as px
 #     credentials = json.load(f)
 # MAPBOX_TOKEN = credentials['token']
 px.set_mapbox_access_token('pk.eyJ1IjoidHFyYWhtYW4iLCJhIjoiY2l0bmh2dnU2MDRvZzJ6bDQ4OWFheXU3NCJ9.bY7m05QGUHV1jQvwwHX-FA')
-<<<<<<< HEAD
+
 mapbox_access_token = 'pk.eyJ1IjoidHFyYWhtYW4iLCJhIjoiY2l0bmh2dnU2MDRvZzJ6bDQ4OWFheXU3NCJ9.bY7m05QGUHV1jQvwwHX-FA'
-=======
+
 #mapbox_access_token = 'pk.eyJ1IjoiamFja2x1byIsImEiOiJjajNlcnh3MzEwMHZtMzNueGw3NWw5ZXF5In0.fk8k06T96Ml9CLGgKmk81w'
->>>>>>> e40e58070c28672c08cafef55d43d09378b8f890
+
 # Reading in the data
 isabela = pd.read_csv("isabela_duck_deployment.csv")
 
@@ -96,7 +96,6 @@ fake_data['duck_longitude'] = fake_data['duck_coordinates'].apply(lambda x: x[1]
 fake_data['civilian_latitude'] = fake_data['civilian_coordinates'].apply(lambda x: x[0][0])
 fake_data['civilian_longitude'] = fake_data['civilian_coordinates'].apply(lambda x: x[0][1])
 
-<<<<<<< HEAD
 # Parse the duck message path from string into a tuple
 def extract_path(path):
     remove_array = path.replace('array', '').replace('(', '').replace(')', '')
@@ -118,8 +117,6 @@ isabela['clean_path'] = isabela['path_coordinates'].map(clean_the_path)
 # Getting the first duck_id
 isabela['first_duck'] = isabela['path'].apply(lambda x: x[:12])
 
-=======
->>>>>>> e40e58070c28672c08cafef55d43d09378b8f890
 ### Dashboard ###
 
 EXTERNAL_STYLESHEETS = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -144,7 +141,6 @@ app.layout = html.Div([
             ),
         html.P(
             dcc.Dropdown(
-<<<<<<< HEAD
                 id='medical-filter',
                 options=option,
                 value=[YN.get(i) for i in YN],
@@ -190,49 +186,13 @@ app.layout = html.Div([
                 )
         ),
         ],
-        style={"width": "15%", "float": "left"},
-=======
-                id='medical-fiter',
-                options=option,
-                value=[1,0],
-                multi=True,
-                )
-            ),
-        # # Dropdown menu for Food
-        # html.P(
-        #     'Food Needed:',
-        #     ),
-        # html.P(
-        #     dcc.Dropdown(
-        #         id='food-filter',
-        #         options=options,
-        #         value=[YN.get(i) for i in YN],
-        #         multi=True,
-        #         )
-        #     ),
-        # # Dropdown menu for Water
-        # html.P(
-        #     'Water Needed:',
-        #     ),
-        # html.P(
-        #     dcc.Dropdown(
-        #         id='water-filter',
-        #         options=options,
-        #         value=[YN.get(i) for i in YN],
-        #         multi=True,
-        #         )
-        #     ),
-
-        ],
              style={"width": "15%", "float": "left"},
->>>>>>> e40e58070c28672c08cafef55d43d09378b8f890
         ),
 
     # Map
     html.Div([
         dcc.Graph(id='map',
                   style={'width':'85%', 'display':'inline-block'})
-<<<<<<< HEAD
     ]),
 
     #Bar Graph
@@ -241,14 +201,11 @@ app.layout = html.Div([
                   figure=px.bar(fake_data, x='food'),
                   style={'width':'50%', 'display':'inline-block'}
                   )
-=======
->>>>>>> e40e58070c28672c08cafef55d43d09378b8f890
     ])
 ])
 
 @app.callback(
     Output('map', 'figure'),
-<<<<<<< HEAD
     [Input('medical-filter', 'value'),
      Input('food-filter', 'value'),
      Input('water-filter', 'value'),
@@ -312,29 +269,10 @@ def get_options(duck_id):
     df = isabela[isabela['first_duck']==duck_id]
     return [{'label':idx, 'value':idx} for idx,val in enumerate(df['clean_path'])]
 
-=======
-    [Input('medical-filter', 'value')]
-)
-def map_graph(med):
-    df = fake_data[fake_data['medical'].isin(med)]
-    fig = px.scatter_mapbox(df,
-                            lat='civilian_latitude',
-                            lon='civilian_longitude',
-                            # mode='markers',
-                            # marker=go.scattermapbox.Marker(size=9),
-                            zoom=15)
-    fig.update_mapboxes({'style':'satellite',
-                         'center':{'lat': fake_data['duck_latitude'].mean(),
-                                   'lon': fake_data['duck_longitude'].mean()}
-                         })
-    return fig
-
->>>>>>> e40e58070c28672c08cafef55d43d09378b8f890
 ### RUNNING APP ###
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-<<<<<<< HEAD
 
 # Questions to ask:
 # Are there specific scenario's for medical emergencies?
@@ -347,5 +285,3 @@ if __name__ == '__main__':
 # Selecting the emergencies that command center can handle
 # First Responders Priortize the hover database
 #
-=======
->>>>>>> e40e58070c28672c08cafef55d43d09378b8f890
